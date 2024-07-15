@@ -11,7 +11,7 @@ server.get("/",(req,res)=>{
 server.use(express.json())
 server.use(cors())
 server.use("/users",userRouter)
-const port = process.env.port;
+const port = process.env.PORT;
 server.listen(port, ()=>{
     console.log(`server is listening on port: ${port}`)
 })
