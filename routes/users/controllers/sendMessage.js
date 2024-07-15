@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer"
-
+import {config} from "dotenv"
+config()
+const s_p= process.env.s_p
 const sendMessage=async(req, res, next)=>{
  const {recipient, text}= req.body
   try {
@@ -15,7 +17,7 @@ const transport =  nodemailer.createTransport({
   service:"gmail",
   auth: {
     user: "stevefromserv@gmail.com",
-    pass: "ssjlwimysceveogw",
+    pass: s_p,
   },
   tls: {
     // do not fail on invalid certs
