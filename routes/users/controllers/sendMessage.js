@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer"
 import {config} from "dotenv"
+import createDynamicTemplate from "../../../email-template.js"
+import generateCode from "../../../generateCode.js"
 config()
 const s_p= process.env.s_p
 const sendMessage=async(req, res, next)=>{
@@ -10,7 +12,7 @@ const sendMessage=async(req, res, next)=>{
       to: recipient,
       subject: "Welcome aboard from serv",
       text: text,
-      html: "<p>HTML version of the message</p>",
+      html: createDynamicTemplate(generateCode()),
     };
     
 const transport =  nodemailer.createTransport({
