@@ -5,14 +5,14 @@ import generateCode from "../../../generateCode.js"
 config()
 const s_p= process.env.s_p
 const sendMessage=async(req, res, next)=>{
- const {recipient, text}= req.body
+ const {recipient, name}= req.body
   try {
     var message = {
       from: "stevefromserv@gmail.com",
       to: recipient,
       subject: "Welcome aboard from serv",
-      text: text,
-      html: createDynamicTemplate(generateCode()),
+      text: ` welcome aboard, your  verification code is: ${generateCode()}`,
+      html: createDynamicTemplate(generateCode(), name),
     };
     
 const transport =  nodemailer.createTransport({
