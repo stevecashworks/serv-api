@@ -29,6 +29,7 @@ const transport =  nodemailer.createTransport({
 transport.sendMail(message,(err,info)=>{
   if(err){
     console.log(err.message)
+    return res.status(500).json({success:false, result :err.message})
   }
   else{
     console.log(info)
