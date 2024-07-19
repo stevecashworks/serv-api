@@ -6,6 +6,7 @@ config()
 const s_p= process.env.s_p
 const sendMessage=async(req, res, next)=>{
  const {email, name}= req.body
+ console.log(req.body)
   try {
     var message = {
       from: "stevefromserv@gmail.com",
