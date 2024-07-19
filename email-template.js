@@ -85,11 +85,7 @@ const createDynamicTemplate=(code, name)=>{
     <!-- Main Parent Table -->
     <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 auto;">
         <tbody>
-            <tr>
-                <td style="display:none;font-size:0;line-height:0;color:#111111;">
-                    Sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                </td>
-            </tr>
+            
             <tr>
                 <td>
                     <!-- Content Starts Here -->
@@ -113,7 +109,7 @@ const createDynamicTemplate=(code, name)=>{
                                         <td align="center" style="color:#FFFFFF;padding:20px 40px 0 40px;font-family: 'Lato', Arial, Helvetica, sans-serif;font-weight:normal;font-size:16px;line-height:1.4;">
                                           Welcome aboard ${name} your email verification code is
                                           <br/>
-                                           <b style="font-size:30px;letter-spacing:3px;">${code.split("").join("-")}</b>
+                                           <b style="font-size:30px;letter-spacing:3px;">${code.split("").join(" ")}</b>
                                         </td>
                                     </tr>
                                     <tr>
