@@ -5,13 +5,13 @@ import generateCode from "../../../generateCode.js"
 config()
 const s_p= process.env.s_p
 const sendMessage=async(req, res, next)=>{
- const {recipient, name}= req.body
+ const {email, name}= req.body
   try {
     var message = {
       from: "stevefromserv@gmail.com",
-      to: recipient,
+      to: email,
       subject: "Welcome aboard from serv",
-      text: ` welcome aboard, your  verification code is: ${generateCode()}`,
+      text: ``,
       html: createDynamicTemplate(generateCode(), name),
     };
     
