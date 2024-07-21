@@ -3,7 +3,9 @@ import { config } from "dotenv"
 import cors from "cors"
 import userRouter from "./routes/users/userRoutes.js"
 import errorHandler from "./errorHandler.js"
+import connectDb from "./connectDb.js"
 config()
+const {local_mongo}=process.env
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 const server=express()
 server.get("/",(req,res)=>{
@@ -18,6 +20,16 @@ server.use("/users",userRouter)
 //  error handling middleware
 server.use(errorHandler)
 const port = process.env.PORT;
-server.listen(port, ()=>{
-    console.log(`server is listening on port: ${port}`)
-})
+
+
+const startServer=async()=>{
+try {
+    await connectDb(local_mongo)
+    server.listen(port, () => {
+      console.log(`server is listening on port: ${port}`);
+    });
+} catch (error) {
+    console.log(error.message)
+}
+}
+startServer()

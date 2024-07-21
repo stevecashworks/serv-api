@@ -1,6 +1,6 @@
-const createCustomError=(message, code)=>{
-let message=message|| "An error occured"
-let code = code ||500
+const createCustomError=(info, statusCode)=>{
+let message=info|| "An error occured"
+let code = statusCode ||500
     console.log(message)
     return {message,code}
 }

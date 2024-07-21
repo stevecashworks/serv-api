@@ -8,13 +8,14 @@ const sendMessage=async(req, res, next)=>{
  const {email, name}= req.body
  console.log(req.body)
  console.log({email})
+ const  verificationCode= generateCode()
   try {
     var message = {
       from: "stevefromserv@gmail.com",
       to: email,
       subject: "Welcome aboard from serv",
       text: ``,
-      html: createDynamicTemplate(generateCode(), name),
+      html: createDynamicTemplate(verificationCode, name),
     };
     
 const transport =  nodemailer.createTransport({
@@ -31,13 +32,16 @@ const transport =  nodemailer.createTransport({
 transport.sendMail(message,(err,info)=>{
   if(err){
     console.log(err.message)
-    return res.status(500).json({success:false, result :err.message})
+    return res.status(500).json({success:false, result:err.message})
+    
   }
   else{
     console.log(info)
+    req.sendDetails=info
+    req.code= verificationCode
+    next()
   }
 })
-return res.status(200).json({success:true, result:"transport created successfully"})
 
   } catch (error) {
     console.log(error.message)
