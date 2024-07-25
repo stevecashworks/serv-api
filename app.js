@@ -5,7 +5,8 @@ import userRouter from "./routes/users/userRoutes.js"
 import errorHandler from "./errorHandler.js"
 import connectDb from "./connectDb.js"
 config()
-const {local_mongo}=process.env
+const {local_mongo, server_mongo}=process.env
+
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 const server=express()
 server.get("/",(req,res)=>{
@@ -24,7 +25,7 @@ const port = process.env.PORT;
 
 const startServer=async()=>{
 try {
-    await connectDb(local_mongo)
+    await connectDb(server_mongo)
     server.listen(port, () => {
       console.log(`server is listening on port: ${port}`);
     });
