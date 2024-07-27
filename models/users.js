@@ -11,6 +11,7 @@ const userModel = Schema({
   },
   password: {
     type: String,
+    required:true
 
   },
 

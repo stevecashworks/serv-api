@@ -26,6 +26,8 @@ const port = process.env.PORT;
 const startServer=async()=>{
 try {
     await connectDb(server_mongo)
+    // db link updated
+    
     server.listen(port, () => {
       console.log(`server is listening on port: ${port}`);
     });
