@@ -4,6 +4,7 @@ import cors from "cors"
 import userRouter from "./routes/users/userRoutes.js"
 import errorHandler from "./errorHandler.js"
 import connectDb from "./connectDb.js"
+import userModel from "./models/users.js"
 config()
 const {local_mongo, server_mongo}=process.env
 
@@ -25,7 +26,9 @@ const port = process.env.PORT;
 
 const startServer=async()=>{
 try {
-    await connectDb(server_mongo)
+    await connectDb(local_mongo)
+    const allUsers=await userModel.find()
+    console.log({allUsers})
     // db link updated
     
     server.listen(port, () => {
