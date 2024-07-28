@@ -26,7 +26,7 @@ const port = process.env.PORT;
 
 const startServer=async()=>{
 try {
-    await connectDb(local_mongo)
+    await connectDb(server_mongo)
     const allUsers=await userModel.find()
     console.log({allUsers})
     // db link updated

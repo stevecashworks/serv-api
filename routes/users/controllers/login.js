@@ -10,7 +10,7 @@ try {
     else{
         const database_password= thisUser.password
         if(pass===database_password){
-            const {password, ...others}=thisUser
+            const {password, ...others}=thisUser._doc
            return res.status(200).json({success:true,result:others})
         }
         else{
