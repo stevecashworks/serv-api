@@ -1,17 +1,26 @@
+import { config } from "dotenv"
 import createCustomError from "../../../createCustomError.js"
 import userModel from "../../../models/users.js"
-const  register=async(req,res,next)=>{
-    const {code, info}=req 
-    try {
-        const newUser=await userModel.create(req.body)
-        if(newUser){
+import jwt from "jsonwebtoken"
 
+config()
+const  register=async(req,res,next)=>{
+    
+    try {
+        const newUser=await userModel.create({...req.body, password:req.body.pass})
+        if(newUser){
+        
             const {password, ...others}=  newUser._doc
-            return res.status(200).json({success:true, result:{code,...others}})
+            const token= await jwt.sign({id:others._id},process.env.jwt_pass)
+            req.proceed_to_send_email=true
+            req.token=token
+            next()
         }
     } catch (error) {
+        req.proceed_to_send_email=false
         console.log(error.message)
-        next(createCustomError(error.message,500))
+        req.errorObject=(createCustomError(error.message,500))
+        next()
     }
 }
 

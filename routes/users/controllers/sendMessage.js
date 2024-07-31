@@ -6,8 +6,12 @@ config()
 const s_p= process.env.s_p
 const sendMessage=async(req, res, next)=>{
  const {email, name}= req.body
- console.log(req.body)
- console.log({email})
+ const  {errorObject,proceed_to_send_email}=req
+ if(!proceed_to_send_email){
+  console.log("registration unsuccessful, will not proceed to send email")
+  return next(errorObject)
+ }
+
  const  verificationCode= generateCode()
   try {
     var message = {
