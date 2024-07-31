@@ -6,7 +6,7 @@ config()
 const s_p= process.env.s_p
 const sendMessage=async(req, res, next)=>{
  const {email, name}= req.body
- const  {errorObject,proceed_to_send_email}=req
+ const  {errorObject,proceed_to_send_email,token}=req
  if(!proceed_to_send_email){
   console.log("registration unsuccessful, will not proceed to send email")
   return next(errorObject)
@@ -43,7 +43,9 @@ transport.sendMail(message,(err,info)=>{
     console.log(info)
     req.sendDetails=info
     req.code= verificationCode
-    next()
+    console.log("email has ben sent")
+    return res.status(200).json({success:true,result:{token,code:verificationCode}})
+    
   }
 })
 
